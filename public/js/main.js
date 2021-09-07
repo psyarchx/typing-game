@@ -1,7 +1,9 @@
 var inputField = $(".input");
 
 $(function(){
-    phraseWordCounter();
+   var words = phraseWordCounter();
+   console.log(words);
+   settingTimer(words);
 });
 
 function phraseWordCounter () {
@@ -9,4 +11,12 @@ function phraseWordCounter () {
     var wordsCount = phrase.split(" ").length;
     var element = $("#phrase-length");
     element.text(wordsCount);
+    return wordsCount;
 }
+
+function settingTimer(words){
+    var time = words * 1.2;
+    console.log(time);
+    $("#timer").text(time);
+}
+
