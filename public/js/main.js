@@ -5,6 +5,7 @@ $(function(){
    console.log(words);
    settingTimer(words);
    fieldInputCounter();
+   stopwatch();
 });
 
 function phraseWordCounter () {
@@ -30,5 +31,20 @@ function fieldInputCounter() {
 
         var characterCount = content.length;
         $("#character-count").text(characterCount);
+    });
+}
+
+function stopwatch(){
+    timeRemaining = $("#timer").text();
+    inputField.one("focus" , function(){
+        var stopwatchID = setInterval(function () {
+            timeRemaining = timeRemaining - 1.2;
+            $("#timer").text(timeRemaining);
+            if (timeRemaining < 1) {
+                inputField.attr("disabled", true);
+                clearInterval(stopwatchID);
+                inputField.css("background-color", "lightgray");
+            }
+        }, 1200);
     });
 }
