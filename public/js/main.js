@@ -1,12 +1,15 @@
 var inputField = $(".input-field");
+var initialTime;
 
 $(function(){
    var words = phraseWordCounter();
-   console.log(words);
    settingTimer(words);
    fieldInputCounter();
    stopwatch();
+   $("#restart-game").click(restartGame);
 });
+
+
 
 function phraseWordCounter () {
     var phrase = $(".phrase").text();
@@ -17,9 +20,10 @@ function phraseWordCounter () {
 }
 
 function settingTimer(words){
-    var time = words * 1.2;
+    var time = words;
     console.log(time);
     $("#timer").text(time);
+    initialTime = words;
 }
 
 function fieldInputCounter() {
@@ -38,13 +42,25 @@ function stopwatch(){
     timeRemaining = $("#timer").text();
     inputField.one("focus" , function(){
         var stopwatchID = setInterval(function () {
-            timeRemaining = timeRemaining - 1.2;
+            timeRemaining--;
             $("#timer").text(timeRemaining);
             if (timeRemaining < 1) {
                 inputField.attr("disabled", true);
                 clearInterval(stopwatchID);
                 inputField.css("background-color", "lightgray");
             }
-        }, 1200);
+        }, 1000);
     });
+}
+
+function restartGame() {
+    console.log("asdasd");
+    inputField.attr("disabled", false);
+    inputField.val("");
+    
+    $("#word-count").text("0");
+    $("#character-count").text("0");
+    $("#timer").text(initialTime);
+    stopwatch()
+    inputField.css("background-color", "white");
 }
