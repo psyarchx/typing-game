@@ -6,6 +6,7 @@ $(function(){
    settingTimer(words);
    fieldInputCounter();
    stopwatch();
+   inputTracker();
    $("#restart-game").click(restartGame);
 });
 
@@ -21,7 +22,6 @@ function phraseWordCounter () {
 
 function settingTimer(words){
     var time = words;
-    console.log(time);
     $("#timer").text(time);
     initialTime = words;
 }
@@ -53,8 +53,24 @@ function stopwatch(){
     });
 }
 
+function inputTracker() {
+    var phrase = $(".phrase").text();
+    inputField.on("input", function() {
+        var typed = inputField.val();
+        var comparison = phrase.substr(0 , typed.length);
+
+        if(typed == comparison) {
+            inputField.addClass("green-border");
+            inputField.removeClass("red-border");
+        } else {
+            inputField.addClass("red-border");
+            inputField.removeClass("green-border");
+        }
+    });
+}
+
+
 function restartGame() {
-    console.log("asdasd");
     inputField.attr("disabled", false);
     inputField.val("");
     

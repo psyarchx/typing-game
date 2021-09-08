@@ -1,3 +1,11 @@
 body {
     margin: auto;
 }
+
+.green-border {
+    border: 5px solid lightgreen;
+}
+
+.red-border {
+    border: 5px solid red;
+}
